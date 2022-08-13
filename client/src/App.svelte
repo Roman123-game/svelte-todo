@@ -19,19 +19,23 @@
     };
     const response = await axios.post("/api/transactions", transaction);
     todos = [response.data, ...todos];
-
   }
+
 </script>
 
 <main>
   <div >
     <input class="input is-primary" type="text" placeholder="Enter Todo" bind:value={value} />
 <p>{value}</p>
-<button on:click={addTodo}>Submit</button>
-<div class="container is-$info">
+<button class="button is-primary is-light" on:click={addTodo}>Submit</button>
+<div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+  
     {#each todos as todo}
-     {space}{todo.value}
+    <p class="is-align-self-center box">{space}{todo.value}</p> 
+    <button class="delete" ></button>
     {/each}
-</div>
   </div>
+</div>
+
+
 </main>
