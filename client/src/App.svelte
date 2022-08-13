@@ -28,7 +28,7 @@
     <input class="input is-primary" type="text" placeholder="Enter Todo" bind:value={value} />
 <p>{value}</p>
 <button on:click={addTodo}>Submit</button>
-<div class="container">
+<div class="container is-$info">
     {#each todos as todo}
      {space}{todo.value}
     {/each}
