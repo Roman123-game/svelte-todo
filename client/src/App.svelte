@@ -10,7 +10,6 @@
     todos =  data;
   });
   async function addTodo() {
-    console.log("addtodo")
     const transaction = {
       value: value
     };
@@ -33,7 +32,7 @@
 <button class="button is-primary is-light" on:click={addTodo}>Submit</button>
 <div class="container is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
     {#each todos as todo (todo._id)}
-    <p class="is-align-self-center box">{space}{todo.value} </p> 
+    <p class="is-align-self-center box ">{space}{todo.value} </p> 
       <button class="delete" on:click={removeTodo(todo)}></button>
     {/each}
   </div>
