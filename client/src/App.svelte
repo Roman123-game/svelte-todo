@@ -27,8 +27,12 @@
   async function removeTodo(event) {
     try {
       const response = await axios.delete("/api/transactions/" + event._id);
-      const { data } = await axios.get("/api/transactions");
-      todos = data;
+      try {
+        const { data } = await axios.get("/api/transactions");
+        todos = data;
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -46,20 +50,22 @@
     />
     <button
       class="m-2 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      on:click={addTodo}>
+      on:click={addTodo}
+    >
       Submit
-  </button>
-    
+    </button>
+
     <div class="container">
       {#each todos as todo (todo._id)}
         <p
           class=" m-2 block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         >
-        <button
-        class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
-        on:click={removeTodo(todo)}>
-        X
-       </button>
+          <button
+            class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+            on:click={removeTodo(todo)}
+          >
+            X
+          </button>
           {todo.value}
         </p>
       {/each}
