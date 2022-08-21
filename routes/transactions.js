@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { value, date } = req.body
+    const { value} = req.body
     const newTransaction = new Transaction({ value})
 
     try {
