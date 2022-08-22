@@ -1,7 +1,8 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-  $: todos = [];
+import {todos} from "./stores"
+
   let value = "";
   let space = "   ";
 
@@ -18,7 +19,7 @@
     try {
       const transaction = { value: value };
       const response = await axios.post("/api/transactions", transaction);
-      todos = [response.data, ...todos];
+      $todos = [response.data, ...$todos];
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +30,7 @@
       const response = await axios.delete("/api/transactions/" + event._id);
       try {
         const { data } = await axios.get("/api/transactions");
-        todos = data;
+        $todos = data;
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +57,7 @@
     </button>
 
     <div class="container">
-      {#each todos as todo (todo._id)}
+      {#each $todos as todo (todo._id)}
         <p
           class=" m-2 block p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         >
