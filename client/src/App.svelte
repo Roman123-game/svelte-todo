@@ -1,10 +1,9 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-import {todos} from "./stores"
+  import { todos } from "./stores";
 
   let value = "";
-  let space = "   ";
 
   onMount(async function () {
     try {
